@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
@@ -26,13 +27,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 }
 
-apply plugin: 'com.novoda.bintray-release'
 publish {
     userOrg = 'zyf19930419'
     groupId = 'com.zhangyunfei'
     artifactId = 'baselibrary'
     repoName='zyfMaven'
-    publishVersion = '0.0.1'
+    publishVersion = '1.0.0'
     desc = '张云飞的基础库'
-    website = 'https://github.com/novoda/bintray-release'
+    website = 'https://github.com/zyf19930419/zyfBaseLibrary'
 }
