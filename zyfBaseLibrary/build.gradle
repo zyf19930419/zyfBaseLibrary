@@ -31,6 +31,7 @@ publish {
     userOrg = 'zyf19930419'
     groupId = 'com.zhangyunfei'
     artifactId = 'baselibrary'
+    repoName='zyfMaven'
     publishVersion = '0.0.1'
     desc = '张云飞的基础库'
     website = 'https://github.com/novoda/bintray-release'
