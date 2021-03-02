@@ -39,23 +39,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 public class LoadingLayout extends FrameLayout {
     public interface OnInflateListener {
         void onInflate(View inflated);
     }
 
     public static LoadingLayout wrap(Activity activity) {
-        return wrap(((ViewGroup)activity.findViewById(android.R.id.content)).getChildAt(0));
+        return wrap(((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0));
     }
+
     public static LoadingLayout wrap(Fragment fragment) {
         return wrap(fragment.getView());
     }
+
     public static LoadingLayout wrap(View view) {
         if (view == null) {
             throw new RuntimeException("content view can not be null");
         }
-        ViewGroup parent = (ViewGroup)view.getParent();
+        ViewGroup parent = (ViewGroup) view.getParent();
         if (parent == null) {
             throw new RuntimeException("parent view can not be null");
         }
@@ -136,6 +137,7 @@ public class LoadingLayout extends FrameLayout {
 
 
     LayoutInflater mInflater;
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -162,6 +164,7 @@ public class LoadingLayout extends FrameLayout {
         }
         return this;
     }
+
     public LoadingLayout setEmpty(@LayoutRes int id) {
         if (mEmptyResId != id) {
             remove(mEmptyResId);
@@ -169,6 +172,7 @@ public class LoadingLayout extends FrameLayout {
         }
         return this;
     }
+
     public LoadingLayout setOnEmptyInflateListener(OnInflateListener listener) {
         mOnEmptyInflateListener = listener;
         if (mOnEmptyInflateListener != null && mLayouts.containsKey(mEmptyResId)) {
@@ -176,6 +180,7 @@ public class LoadingLayout extends FrameLayout {
         }
         return this;
     }
+
     public LoadingLayout setOnErrorInflateListener(OnInflateListener listener) {
         mOnErrorInflateListener = listener;
         if (mOnErrorInflateListener != null && mLayouts.containsKey(mErrorResId)) {
@@ -189,16 +194,19 @@ public class LoadingLayout extends FrameLayout {
         image(mEmptyResId, R.id.empty_image, mEmptyImage);
         return this;
     }
+
     public LoadingLayout setEmptyText(String value) {
         mEmptyText = value;
         text(mEmptyResId, R.id.empty_text, mEmptyText);
         return this;
     }
+
     public LoadingLayout setErrorImage(@DrawableRes int resId) {
         mErrorImage = resId;
         image(mErrorResId, R.id.error_image, mErrorImage);
         return this;
     }
+
     public LoadingLayout setErrorText(String value) {
         mErrorText = value;
         text(mErrorResId, R.id.error_text, mErrorText);
@@ -278,11 +286,11 @@ public class LoadingLayout extends FrameLayout {
         mLayouts.put(layoutId, layout);
 
         if (layoutId == mEmptyResId) {
-            ImageView img = (ImageView) layout.findViewById(R.id.empty_image);
-            if (img != null) {
+            ImageView img =  layout.findViewById(R.id.empty_image);
+            if (img != null && mEmptyImage > 0) {
                 img.setImageResource(mEmptyImage);
             }
-            TextView view = (TextView) layout.findViewById(R.id.empty_text);
+            TextView view =  layout.findViewById(R.id.empty_text);
             if (view != null) {
                 view.setText(mEmptyText);
                 view.setTextColor(mTextColor);
@@ -292,17 +300,17 @@ public class LoadingLayout extends FrameLayout {
                 mOnEmptyInflateListener.onInflate(layout);
             }
         } else if (layoutId == mErrorResId) {
-            ImageView img = (ImageView) layout.findViewById(R.id.error_image);
-            if (img != null) {
+            ImageView img =  layout.findViewById(R.id.error_image);
+            if (img != null && mErrorImage > 0) {
                 img.setImageResource(mErrorImage);
             }
-            TextView txt = (TextView) layout.findViewById(R.id.error_text);
+            TextView txt =  layout.findViewById(R.id.error_text);
             if (txt != null) {
                 txt.setText(mErrorText);
                 txt.setTextColor(mTextColor);
                 txt.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
             }
-            TextView btn = (TextView) layout.findViewById(R.id.retry_button);
+            TextView btn =  layout.findViewById(R.id.retry_button);
             if (btn != null) {
                 btn.setText(mRetryText);
                 btn.setTextColor(mButtonTextColor);
@@ -319,7 +327,7 @@ public class LoadingLayout extends FrameLayout {
 
     private void text(int layoutId, int ctrlId, CharSequence value) {
         if (mLayouts.containsKey(layoutId)) {
-            TextView view = (TextView) mLayouts.get(layoutId).findViewById(ctrlId);
+            TextView view =  mLayouts.get(layoutId).findViewById(ctrlId);
             if (view != null) {
                 view.setText(value);
             }
@@ -328,7 +336,7 @@ public class LoadingLayout extends FrameLayout {
 
     private void image(int layoutId, int ctrlId, int resId) {
         if (mLayouts.containsKey(layoutId)) {
-            ImageView view = (ImageView) mLayouts.get(layoutId).findViewById(ctrlId);
+            ImageView view =  mLayouts.get(layoutId).findViewById(ctrlId);
             if (view != null) {
                 view.setImageResource(resId);
             }
