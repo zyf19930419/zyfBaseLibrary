@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 /命令行.md
+/.idea/gradle.xml
+/.idea/misc.xml
